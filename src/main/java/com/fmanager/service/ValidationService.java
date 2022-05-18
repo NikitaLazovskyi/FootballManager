@@ -5,7 +5,7 @@ import com.fmanager.entity.Team;
 
 import java.math.BigDecimal;
 
-public class Validator {
+public class ValidationService {
     private static final String pName = "^[-\\w\\s]+$";
 
     public static boolean validate(Player player){

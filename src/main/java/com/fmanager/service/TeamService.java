@@ -24,7 +24,7 @@ public class TeamService {
     }
 
     public Team create(Team team) {
-        if (Validator.validate(team)) {
+        if (ValidationService.validate(team)) {
             return teamRepository.save(team);
         } else {
             throw new InvalidEntityException("not acceptable team : " + team);

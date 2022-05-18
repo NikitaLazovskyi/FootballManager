@@ -29,7 +29,7 @@ public class PlayerService {
     }
 
     public Player create(Player player) {
-        if (Validator.validate(player)) {
+        if (ValidationService.validate(player)) {
             player.setCost(new BigDecimal(player.getExperience() * 100_000 / player.getAge()));
             return playerRepository.save(player);
         } else {
