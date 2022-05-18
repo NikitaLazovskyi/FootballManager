@@ -9,3 +9,4 @@ spring:
     username: fmanager_user
     password: root
     driver-class-name: org.postgresql.Driver
+    initialization-mode: always
