@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fmanager?useUnicode=true
+    username: fmanager_user
+    password: root
+    driver-class-name: org.postgresql.Driver
