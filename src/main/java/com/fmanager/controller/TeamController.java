@@ -1,6 +1,7 @@
 package com.fmanager.controller;
 
 import com.fmanager.dto.TeamDto;
+import com.fmanager.dto.TopUpDto;
 import com.fmanager.service.EntityMapper;
 import com.fmanager.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class TeamController {
     @DeleteMapping("/teams/{id}")
     public TeamDto delete(@PathVariable Long id){
         return entityMapper.toDto(teamService.delete(teamService.findById(id)));
+    }
+
+    @PostMapping("/teams/topup")
+    public TeamDto topUp(@RequestBody TopUpDto topUpDto){
+        return entityMapper.toDto(teamService.topUpBankAccount(topUpDto.getTeamId(), topUpDto.getAmount()));
     }
 }

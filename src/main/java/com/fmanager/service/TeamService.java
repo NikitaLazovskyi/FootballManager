@@ -7,6 +7,7 @@ import com.fmanager.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -37,6 +38,13 @@ public class TeamService {
 
     public Team delete(Team team) {
         teamRepository.delete(team);
+        return team;
+    }
+
+    public Team topUpBankAccount(Long teamId, BigDecimal amount){
+        Team team = findById(teamId);
+        team.setBankAccount(team.getBankAccount().add(amount));
+        save(team);
         return team;
     }
 
