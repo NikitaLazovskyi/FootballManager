@@ -3,6 +3,7 @@ package com.fmanager.controller;
 import com.fmanager.dto.PlayerDto;
 import com.fmanager.dto.Response;
 import com.fmanager.dto.TransferPlayerDto;
+import com.fmanager.dto.UpdatePlayerDto;
 import com.fmanager.service.EntityMapper;
 import com.fmanager.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class PlayerController {
     @PostMapping("/players")
     public Long create(@RequestBody PlayerDto playerDto){
         return playerService.create(entityMapper.toEntity(playerDto)).getId();
+    }
+
+    @PutMapping("/players")
+    public PlayerDto update(@RequestBody UpdatePlayerDto update){
+        return entityMapper.toDto(playerService.update(update));
     }
 
     @GetMapping("/players/{id}")

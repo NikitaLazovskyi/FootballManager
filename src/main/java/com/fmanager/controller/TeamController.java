@@ -2,6 +2,7 @@ package com.fmanager.controller;
 
 import com.fmanager.dto.TeamDto;
 import com.fmanager.dto.TopUpDto;
+import com.fmanager.dto.UpdateTeamDto;
 import com.fmanager.service.EntityMapper;
 import com.fmanager.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class TeamController {
     @PostMapping("/teams")
     public Long create(@RequestBody TeamDto teamDto){
         return teamService.create(entityMapper.toEntity(teamDto)).getId();
+    }
+
+    @PutMapping("/teams")
+    public TeamDto update(@RequestBody UpdateTeamDto update){
+        return entityMapper.toDto(teamService.update(update));
     }
 
     @GetMapping("/teams/{id}")

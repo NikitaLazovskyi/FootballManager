@@ -1,5 +1,8 @@
 package com.fmanager.service;
 
+import com.fmanager.dto.UpdatePlayerDto;
+import com.fmanager.dto.UpdateTeamDto;
+import com.fmanager.entity.Player;
 import com.fmanager.entity.Team;
 import com.fmanager.exception.EntityNotFoundException;
 import com.fmanager.exception.InvalidEntityException;
@@ -32,8 +35,29 @@ public class TeamService {
         }
     }
 
+    public Team update(UpdateTeamDto update) {
+        Team foundTeam = findById(update.getId());
+        if (update.getName() != null) {
+            foundTeam.setName(update.getName());
+        }
+        if (update.getCommission() != null) {
+            foundTeam.setCommission(update.getCommission());
+        }
+        if (ValidationService.validate(foundTeam)) {
+            teamRepository.save(foundTeam);
+            return foundTeam;
+        } else {
+            throw new InvalidEntityException("invalid name " + foundTeam.getName() + " or commission: " + foundTeam.getCommission() + " (must be 0 >= commission <= 10) ");
+        }
+    }
+
     public Team findById(Long id) {
-        return teamRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("cant find team by id " + id));
+        if (id != null) {
+            return teamRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("can't find team by id " + id));
+        } else {
+            throw new IllegalArgumentException("can't be null. Team id: " + id);
+        }
+
     }
 
     public Team delete(Team team) {
@@ -41,7 +65,7 @@ public class TeamService {
         return team;
     }
 
-    public Team topUpBankAccount(Long teamId, BigDecimal amount){
+    public Team topUpBankAccount(Long teamId, BigDecimal amount) {
         Team team = findById(teamId);
         team.setBankAccount(team.getBankAccount().add(amount));
         save(team);

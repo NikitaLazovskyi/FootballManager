@@ -1,6 +1,7 @@
 package com.fmanager.service;
 
 import com.fmanager.dto.Response;
+import com.fmanager.dto.UpdatePlayerDto;
 import com.fmanager.entity.Player;
 import com.fmanager.entity.Team;
 import com.fmanager.exception.EntityNotFoundException;
@@ -39,8 +40,28 @@ public class PlayerService {
         }
     }
 
+    public Player update(UpdatePlayerDto update) {
+        Player foundPlayer = findById(update.getId());
+        if (update.getName() != null) {
+            foundPlayer.setName(update.getName());
+        }
+        if (update.getLastname() != null) {
+            foundPlayer.setLastname(update.getLastname());
+        }
+        if (ValidationService.validate(foundPlayer)) {
+            playerRepository.save(foundPlayer);
+            return foundPlayer;
+        } else {
+            throw new InvalidEntityException("invalid name " + foundPlayer.getName() + " or lastname " + foundPlayer.getLastname());
+        }
+    }
+
     public Player findById(Long id) {
-        return playerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("cant find player by id " + id));
+        if (id != null) {
+            return playerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("cant find player by id " + id));
+        } else {
+            throw new IllegalArgumentException("can't be null. Player id: " + id);
+        }
     }
 
     public Player delete(Player player) {
@@ -60,7 +81,7 @@ public class PlayerService {
 
 
         if (nextTeam.equals(previousTeam)) {
-            throw  new InvalidTransferException(previousTeam.getName() + " and " + nextTeam.getName() + " are same");
+            throw new InvalidTransferException(previousTeam.getName() + " and " + nextTeam.getName() + " are same");
         }
 
         BigDecimal price = player.getCost().multiply(BigDecimal.valueOf(((double) previousTeam.getCommission() / 100D) + 1D));
