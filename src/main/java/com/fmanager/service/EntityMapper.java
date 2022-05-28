@@ -14,18 +14,40 @@ public class EntityMapper {
     private TeamService teamService;
 
     public Player toEntity(PlayerDto playerDto){
-        return new Player(playerDto.getId(), playerDto.getName(), playerDto.getLastname(), playerDto.getAge(), playerDto.getExperience(), teamService.findById(playerDto.getTeamId()), playerDto.getCost());
+        return new Player(
+                playerDto.getId(),
+                playerDto.getName(),
+                playerDto.getLastname(),
+                playerDto.getAge(),
+                playerDto.getExperience(),
+                teamService.findById(playerDto.getTeamId()),
+                playerDto.getCost());
     }
 
     public PlayerDto toDto(Player player){
-        return new PlayerDto(player.getId(), player.getName(), player.getLastname(), player.getAge(), player.getExperience(), player.getTeam().getId() , player.getCost());
+        return new PlayerDto(
+                player.getId(),
+                player.getName(),
+                player.getLastname(),
+                player.getAge(),
+                player.getExperience(),
+                player.getTeam().getId() ,
+                player.getCost());
     }
 
     public Team toEntity(TeamDto teamDto){
-        return new Team(teamDto.getId(), teamDto.getName(), teamDto.getCommission(), teamDto.getBankAccount());
+        return new Team(
+                teamDto.getId(),
+                teamDto.getName(),
+                teamDto.getCommission(),
+                teamDto.getBankAccount());
     }
 
     public TeamDto toDto(Team team){
-        return new TeamDto(team.getId(), team.getName(), team.getCommission(), team.getBankAccount());
+        return new TeamDto(
+                team.getId(),
+                team.getName(),
+                team.getCommission(),
+                team.getBankAccount());
     }
 }
