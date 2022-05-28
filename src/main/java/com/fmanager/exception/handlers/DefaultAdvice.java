@@ -18,7 +18,7 @@ public class DefaultAdvice extends ResponseEntityExceptionHandler {//унасл�
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Response> handleException(EntityNotFoundException e) {
         Response response = new Response(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidEntityException.class)

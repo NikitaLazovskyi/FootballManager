@@ -11,6 +11,7 @@ public class ValidationService {
     public static boolean validate(Player player){
         return player.getAge() >= 18
                 && player.getExperience() >= 0
+                && player.getName() != null
                 && player.getName().matches(pName)
                 && player.getLastname().matches(pName);
     }
@@ -19,6 +20,7 @@ public class ValidationService {
         return team.getBankAccount().compareTo(new BigDecimal(0)) >= 0
                 && team.getCommission() >= 0
                 && team.getCommission() <= 10
+                && team.getName() != null
                 && team.getName().matches(pName);
     }
 }
