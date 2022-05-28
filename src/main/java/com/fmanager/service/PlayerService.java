@@ -1,9 +1,11 @@
 package com.fmanager.service;
 
+import com.fmanager.dto.Response;
 import com.fmanager.entity.Player;
 import com.fmanager.entity.Team;
 import com.fmanager.exception.EntityNotFoundException;
 import com.fmanager.exception.InvalidEntityException;
+import com.fmanager.exception.InvalidTransferException;
 import com.fmanager.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,14 +53,14 @@ public class PlayerService {
     }
 
     @Transactional
-    public String transfer(Long playerId, Long teamId) {
+    public Response transfer(Long playerId, Long teamId) {
         Player player = findById(playerId);
         Team nextTeam = teamService.findById(teamId);
         Team previousTeam = player.getTeam();
 
 
         if (nextTeam.equals(previousTeam)) {
-            return "Same teams";
+            throw  new InvalidTransferException(previousTeam.getName() + " and " + nextTeam.getName() + " are same");
         }
 
         BigDecimal price = player.getCost().multiply(BigDecimal.valueOf(((double) previousTeam.getCommission() / 100D) + 1D));
@@ -72,9 +74,9 @@ public class PlayerService {
             teamService.save(previousTeam);
             teamService.save(nextTeam);
 
-            return "Success";
+            return new Response("success");
         } else {
-            return "Team hasn't enough money to buy a player";
+            throw new InvalidTransferException(nextTeam.getName() + " hasn't enough money for transfer");
         }
     }
 }

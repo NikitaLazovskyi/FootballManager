@@ -1,6 +1,7 @@
 package com.fmanager.controller;
 
 import com.fmanager.dto.PlayerDto;
+import com.fmanager.dto.Response;
 import com.fmanager.dto.TransferPlayerDto;
 import com.fmanager.service.EntityMapper;
 import com.fmanager.service.PlayerService;
@@ -40,7 +41,7 @@ public class PlayerController {
     }
 
     @PostMapping("/players/transfer")
-    public String transfer(@RequestBody TransferPlayerDto transferPlayerDto){
+    public Response transfer(@RequestBody TransferPlayerDto transferPlayerDto){
         return playerService.transfer(transferPlayerDto.getPlayerId(), transferPlayerDto.getTeamId());
     }
 }
