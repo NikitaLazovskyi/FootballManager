@@ -33,7 +33,7 @@ public class PlayerService {
 
     public Player create(Player player) {
         if (ValidationService.validate(player)) {
-            player.setCost(new BigDecimal(player.getExperience() * 100_000 / player.getAge()));
+            player.setCost(BigDecimal.valueOf( player.getExperience() * 100_000 / (double) player.getAge()));
             return playerRepository.save(player);
         } else {
             throw new InvalidEntityException("not acceptable player : " + player);
