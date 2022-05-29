@@ -18,8 +18,8 @@ public class EntityMapper {
                 playerDto.getId(),
                 playerDto.getName(),
                 playerDto.getLastname(),
-                playerDto.getAge(),
-                playerDto.getExperience(),
+                playerDto.getDob(),
+                playerDto.getStartCareer(),
                 teamService.findById(playerDto.getTeamId()),
                 playerDto.getCost());
     }
@@ -29,8 +29,8 @@ public class EntityMapper {
                 player.getId(),
                 player.getName(),
                 player.getLastname(),
-                player.getAge(),
-                player.getExperience(),
+                player.getDateOfBirth(),
+                player.getStartCareer(),
                 player.getTeam().getId() ,
                 player.getCost());
     }

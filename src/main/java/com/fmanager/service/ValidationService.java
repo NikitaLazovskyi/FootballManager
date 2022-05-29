@@ -4,6 +4,7 @@ import com.fmanager.entity.Player;
 import com.fmanager.entity.Team;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class ValidationService {
     private static final String pName = "^[a-zA-Z\\s-]{2,}$";
@@ -11,11 +12,11 @@ public class ValidationService {
     public static boolean validate(Player player){
         return player.getName() != null
                 && player.getLastname() != null
-                && player.getExperience() != null
-                && player.getAge() != null
+                && player.getStartCareer() != null
+                && player.getDateOfBirth() != null
                 && player.getTeam() != null
-                && player.getAge() >= 18
-                && player.getExperience() >= 0
+                && ComputingService.computeAge(player.getDateOfBirth()) >= 18
+                && ComputingService.computeExperience(player.getStartCareer()) >= 0
                 && player.getName().matches(pName)
                 && player.getLastname().matches(pName);
     }

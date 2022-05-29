@@ -1,9 +1,11 @@
 package com.fmanager.entity;
 
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -18,8 +20,8 @@ public class Player {
     private Long id;
     private String name;
     private String lastname;
-    private Integer age;
-    private Integer experience;
+    private LocalDate dateOfBirth;
+    private LocalDate startCareer;
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Team team;
     private BigDecimal cost;

@@ -1,9 +1,9 @@
 package com.fmanager.dto;
 
-import com.fmanager.entity.Team;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -15,9 +15,9 @@ public class PlayerDto {
 
     private String lastname;
 
-    private Integer age;
+    private LocalDate dob;
 
-    private Integer experience;
+    private LocalDate startCareer;
 
     private Long teamId;
 

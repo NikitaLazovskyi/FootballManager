@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerService {
@@ -33,7 +34,7 @@ public class PlayerService {
 
     public Player create(Player player) {
         if (ValidationService.validate(player)) {
-            player.setCost(BigDecimal.valueOf( player.getExperience() * 100_000 / (double) player.getAge()));
+            player.setCost(ComputingService.computeCost(player.getDateOfBirth(), player.getStartCareer()));
             return playerRepository.save(player);
         } else {
             throw new InvalidEntityException("not acceptable player : " + player);
@@ -55,6 +56,12 @@ public class PlayerService {
             throw new InvalidEntityException("invalid name " + foundPlayer.getName() + " or lastname " + foundPlayer.getLastname());
         }
     }
+
+//    public void updateCostOfEachPlayer(){
+//        List<Player> collect = findAll();
+//        collect.forEach(player -> player.setCost(ComputingService.computeCost(player.getDateOfBirth(), player.getStartCareer())));
+//        playerRepository.saveAll(collect);
+//    }
 
     public Player findById(Long id) {
         if (id != null) {
