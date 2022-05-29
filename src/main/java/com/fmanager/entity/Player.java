@@ -1,7 +1,6 @@
 package com.fmanager.entity;
 
 import lombok.*;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
