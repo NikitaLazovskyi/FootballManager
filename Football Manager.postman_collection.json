@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Mark\",\r\n    \"lastname\":\"Johnson\",\r\n    \"age\":19,\r\n    \"experience\":2,\r\n    \"teamId\":3\r\n}",
+							"raw": "{\r\n    \"name\":\"Mark\",\r\n    \"lastname\":\"Johnson\",\r\n    \"dob\":\"1999-09-10\",\r\n    \"startCareer\":\"2018-02-05\",\r\n    \"teamId\":3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,7 +192,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/teams/1",
+							"raw": "http://localhost:8080/teams/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,7 +200,7 @@
 							"port": "8080",
 							"path": [
 								"teams",
-								"1"
+								"4"
 							]
 						}
 					},
