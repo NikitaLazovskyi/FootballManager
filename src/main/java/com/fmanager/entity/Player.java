@@ -22,7 +22,7 @@ public class Player {
     private String lastname;
     private LocalDate dateOfBirth;
     private LocalDate startCareer;
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private Team team;
     private BigDecimal cost;
 }
