@@ -57,11 +57,11 @@ public class PlayerService {
         }
     }
 
-//    public void updateCostOfEachPlayer(){
-//        List<Player> collect = findAll();
-//        collect.forEach(player -> player.setCost(ComputingService.computeCost(player.getDateOfBirth(), player.getStartCareer())));
-//        playerRepository.saveAll(collect);
-//    }
+    public void updateCostOfEachPlayer(){
+        List<Player> collect = findAll();
+        collect.forEach(player -> player.setCost(ComputingService.computeCost(player.getDateOfBirth(), player.getStartCareer())));
+        playerRepository.saveAll(collect);
+    }
 
     public Player findById(Long id) {
         if (id != null) {
